@@ -1,6 +1,6 @@
 const { sequelize, DataTypes } = require('sequelize');
 
-const Posts = sequelize.define('Posts', {
+const PostReplies = sequelize.define('PostReplies', {
 
     id: {
         type: DataTypes.INTEGER,
@@ -12,6 +12,12 @@ const Posts = sequelize.define('Posts', {
         type: DataTypes.INTEGER,
         unique: true,
         allowNull: false
+    },
+
+    post_id: {
+        type: DataTypes.INTEGER,
+        unique: true,
+        allowNull: false        
     },
      
     title: {
@@ -34,18 +40,18 @@ const Posts = sequelize.define('Posts', {
     }
 );
 
-Posts.associate = (models) => {
+PostReplies.associate = (models) => {
 
-    Posts.belongsTo(models.User, {
+    PostReplies.belongsTo(models.User, {
         foreignKey: 'user_id',
         targetKey: 'id',
         as: 'user'
     });
 
-    Posts.hasMany(models.PostReplies , {
+    PostReplies.belongsTo(models.User, {
         foreignKey: 'post_id',
-        as: 'postReplies'
+        targetKey: 'id',
+        as: 'post'
     })
-}
 
-module.exports = {Posts};
+}
