@@ -1,4 +1,5 @@
 const { sequelize, DataTypes } = require('sequelize');
+const { User } = require('./User');
 
 const PostReplies = sequelize.define('PostReplies', {
 
@@ -48,10 +49,12 @@ PostReplies.associate = (models) => {
         as: 'user'
     });
 
-    PostReplies.belongsTo(models.User, {
+    PostReplies.belongsTo(models.Posts, {
         foreignKey: 'post_id',
         targetKey: 'id',
         as: 'post'
     })
 
 }
+
+module.exports = {PostReplies}

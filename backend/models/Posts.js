@@ -13,6 +13,11 @@ const Posts = sequelize.define('Posts', {
         unique: true,
         allowNull: false
     },
+
+    attachments: {
+        type: DataTypes.ARRAY,
+        allowNull: true
+    },
      
     title: {
         type: DataTypes.STRING,

@@ -30,4 +30,19 @@ const User = sequelize.define("User", {
     updatedAt: 'updated_at'
 });
 
+User.associate = (models) => {
+
+    User.hasMany(models.Posts, {
+        foreignKey: 'user_id',
+        as: 'posts'
+    }),
+
+    User.hasMany(models.PostReplies, {
+        foreignKey: 'user_id',
+        as: 'postreplies'
+    })
+}
+
+
+
 module.exports = {User};
