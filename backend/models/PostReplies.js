@@ -1,8 +1,7 @@
-const { sequelize, DataTypes } = require('sequelize');
-const { User } = require('./User');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/database');
 
 const PostReplies = sequelize.define('PostReplies', {
-
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -11,50 +10,51 @@ const PostReplies = sequelize.define('PostReplies', {
 
     user_id: {
         type: DataTypes.INTEGER,
-        unique: true,
         allowNull: false
     },
 
     post_id: {
         type: DataTypes.INTEGER,
-        unique: true,
         allowNull: false        
     },
-     
+
+    attachments: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true
+    },
+
     title: {
         type: DataTypes.STRING,
         allowNull: false
     },
 
     content: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
 
     date: {
         type: DataTypes.DATE,
-    }}, {
-        tableName: 'users',
-        timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        defaultValue: DataTypes.NOW
     }
-);
+}, {
+    tableName: 'post_replies',
+    timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+});
+
 
 PostReplies.associate = (models) => {
-
     PostReplies.belongsTo(models.User, {
         foreignKey: 'user_id',
-        targetKey: 'id',
         as: 'user'
     });
 
     PostReplies.belongsTo(models.Posts, {
         foreignKey: 'post_id',
-        targetKey: 'id',
         as: 'post'
-    })
+    });
+};
 
-}
-
-module.exports = {PostReplies}
+module.exports = PostReplies;
