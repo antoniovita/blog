@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../config/db');
 
 const PostReplies = sequelize.define('PostReplies', {
     id: {
@@ -19,8 +19,8 @@ const PostReplies = sequelize.define('PostReplies', {
     },
 
     attachments: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
-        allowNull: true
+        type: DataTypes.JSON,
+        allowNull: true,
     },
 
     title: {

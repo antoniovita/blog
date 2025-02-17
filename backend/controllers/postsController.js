@@ -2,8 +2,11 @@ const { Posts, User } = require('../models');
 
 const createPost = async (req, res) => {
     try {
-        const { title, content, date, attachments } = req.body;
-        const { user_id } = req.params;
+        const { title, content, date, attachments, user_id } = req.body;
+
+        if (!user_id) {
+            return res.status(400).json({ error: "user_id é obrigatório." });
+        }
 
         const post = await Posts.create({ title, content, date, attachments, user_id });
 
@@ -16,8 +19,8 @@ const createPost = async (req, res) => {
 
 const deletePost = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
-        const post = await Posts.findOne({ where: { id, user_id } });
+        const { id } = req.params;
+        const post = await Posts.findOne({ where: { id } });
 
         if (!post) {
             return res.status(404).json({ error: "Post não encontrado." });
@@ -34,7 +37,7 @@ const deletePost = async (req, res) => {
 const getAllPosts = async (req, res) => {
     try {
         const posts = await Posts.findAll({
-            include: { model: User, as: 'user', attributes: ['id', 'name', 'email'] }
+            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
         });
 
         res.json(posts);
@@ -49,7 +52,7 @@ const getAllPostsByUser = async (req, res) => {
         const { user_id } = req.params;
         const posts = await Posts.findAll({
             where: { user_id },
-            include: { model: User, as: 'user', attributes: ['id', 'name', 'email'] }
+            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
         });
 
         res.json(posts);
@@ -61,10 +64,10 @@ const getAllPostsByUser = async (req, res) => {
 
 const getPostById = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
+        const { id } = req.params;
         const post = await Posts.findOne({
-            where: { id, user_id },
-            include: { model: User, as: 'user', attributes: ['id', 'name', 'email'] }
+            where: { id },
+            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
         });
 
         if (!post) {
@@ -80,10 +83,10 @@ const getPostById = async (req, res) => {
 
 const updatePost = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
+        const { id } = req.params;
         const { title, content, date, attachments } = req.body;
 
-        const post = await Posts.findOne({ where: { id, user_id } });
+        const post = await Posts.findOne({ where: { id } });
 
         if (!post) {
             return res.status(404).json({ error: 'Post não encontrado.' });

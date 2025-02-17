@@ -2,10 +2,13 @@ const { Posts, User, PostReplies } = require('../models');
 
 const createPostReply = async (req, res) => {
     try {
-        const { title, content, date, attachments } = req.body;
-        const { user_id } = req.params;
+        const { title, content, date, attachments, post_id, user_id } = req.body;
 
-        const postReply = await PostReplies.create({ title, content, date, attachments, user_id });
+        if (!post_id || !user_id) {
+            return res.status(400).json({ error: "post_id e user_id são obrigatórios." });
+        }
+
+        const postReply = await PostReplies.create({ title, content, date, attachments, post_id, user_id });
 
         res.status(201).json(postReply);
     } catch (error) {
@@ -16,8 +19,8 @@ const createPostReply = async (req, res) => {
 
 const deletePostReply = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
-        const postReply = await PostReplies.findOne({ where: { id, user_id } });
+        const { id } = req.params;
+        const postReply = await PostReplies.findOne({ where: { id } });
 
         if (!postReply) {
             return res.status(404).json({ error: "Resposta do post não encontrada." });
@@ -34,7 +37,10 @@ const deletePostReply = async (req, res) => {
 const getAllPostReplies = async (req, res) => {
     try {
         const postReplies = await PostReplies.findAll({
-            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
+            include: [
+                { model: User, as: 'user', attributes: ['id', 'username', 'email'] },
+                { model: Posts, as: 'post', attributes: ['id', 'title'] }
+            ]
         });
 
         res.json(postReplies);
@@ -49,7 +55,10 @@ const getAllPostRepliesByUser = async (req, res) => {
         const { user_id } = req.params;
         const postReplies = await PostReplies.findAll({
             where: { user_id },
-            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
+            include: [
+                { model: User, as: 'user', attributes: ['id', 'username', 'email'] },
+                { model: Posts, as: 'post', attributes: ['id', 'title'] }
+            ]
         });
 
         res.json(postReplies);
@@ -61,10 +70,13 @@ const getAllPostRepliesByUser = async (req, res) => {
 
 const getPostReplyById = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
+        const { id } = req.params;
         const postReply = await PostReplies.findOne({
-            where: { id, user_id },
-            include: { model: User, as: 'user', attributes: ['id', 'username', 'email'] }
+            where: { id },
+            include: [
+                { model: User, as: 'user', attributes: ['id', 'username', 'email'] },
+                { model: Posts, as: 'post', attributes: ['id', 'title'] }
+            ]
         });
 
         if (!postReply) {
@@ -80,10 +92,10 @@ const getPostReplyById = async (req, res) => {
 
 const updatePostReply = async (req, res) => {
     try {
-        const { id, user_id } = req.params;
+        const { id } = req.params;
         const { title, content, date, attachments } = req.body;
 
-        const postReply = await PostReplies.findOne({ where: { id, user_id } });
+        const postReply = await PostReplies.findOne({ where: { id } });
 
         if (!postReply) {
             return res.status(404).json({ error: "Resposta do post não encontrada." });

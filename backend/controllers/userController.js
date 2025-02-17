@@ -55,4 +55,14 @@ const loginEmail = async (req, res) => {
     }
 };
 
-module.exports = { createUser, loginUsername, loginEmail };
+const getAllUsers = async (req, res) => {
+  try {
+    const user = await User.findAll();
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Erro ao buscar usuários" })
+  }
+};
+
+module.exports = { createUser, loginUsername, loginEmail, getAllUsers };
