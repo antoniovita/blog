@@ -3,38 +3,11 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const NavBar = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    console.log("Token:", token);
-    if (token) {
-      axios
-        .get("http://localhost:3000/user/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
-          console.log("Usuário recebido:", response.data);
-          setUser(response.data);
-        })
-        .catch((error) => {
-          console.error("Erro ao buscar o usuário:", error);
-          setUser(null);
-        });
-    } else {
-      console.log("Token não encontrado");
-    }
-  }, [token]);
-
+  const username = localStorage.getItem('username');
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setToken(null);
-    setUser(null);
-    console.log("Logout feito, token e usuário removidos");
+    localStorage.removeItem('username');
+    window.location.reload();
   };
-
-  console.log("Estado atual do token:", token);
-  console.log("Estado atual do usuário:", user);
 
   return (
     <nav className="bg-black p-5 flex justify-between items-center text-white shadow-xl fixed w-full top-0 left-0 z-20">
@@ -55,7 +28,7 @@ const NavBar = () => {
       </div>
 
       <div className="flex items-center space-x-4 mr-5">
-        {token && user ? (
+        {username ? (
           <div className="flex items-center space-x-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +46,7 @@ const NavBar = () => {
               <circle cx="12" cy="10" r="4" />
               <circle cx="12" cy="12" r="10" />
             </svg>
-            <span className="text-lg font-medium">Olá, {user.username}</span>
+            <span className="text-lg font-medium">Olá, {username}</span>
             <button
               onClick={handleLogout}
               className="text-lg font-medium bg-red-600 px-4 py-2 rounded-full hover:bg-red-500 transition-all duration-300"

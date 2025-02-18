@@ -32,8 +32,11 @@ const LoginPage = () => {
       }
 
       const response = await axios.post(`http://localhost:3000${endpoint}`, payload);
+      console.log(response.data);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("username", response.data.username);
       navigate("/");
+      window.location.reload();
     } catch (error) {
       setError(error.response?.data?.message || "Erro ao processar requisição");
     }
