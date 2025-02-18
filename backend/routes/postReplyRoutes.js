@@ -11,4 +11,3 @@ router.get('/getAllByUser' , getAllPostReplies);
 router.get('/getById' , getPostReplyById);
 
 module.exports = router;
-

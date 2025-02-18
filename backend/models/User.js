@@ -37,10 +37,6 @@ User.associate = (models) => {
         as: 'posts'
     });
 
-    User.hasMany(models.PostReplies, {
-        foreignKey: 'user_id',
-        as: 'postReplies'
-    });
 };
 
 module.exports = User;

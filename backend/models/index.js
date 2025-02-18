@@ -3,12 +3,10 @@ const sequelize = require('../config/db');
 
 const User = require('./User');
 const Posts = require('./Posts');
-const PostReplies = require('./PostReplies');
 
 const models = {
   User,
-  Posts,
-  PostReplies
+  Posts
 };
 
 Object.keys(models).forEach(modelName => {
@@ -30,5 +28,4 @@ module.exports = {
   sequelize,
   User,
   Posts,
-  PostReplies
 };
