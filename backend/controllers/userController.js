@@ -30,7 +30,8 @@ const loginUsername = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Credenciais inválidas' });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token,
+          username: user.username });
     } catch (err) {
         console.error(err);
         res.status(400).json({ message: err.message });
@@ -48,7 +49,9 @@ const loginEmail = async (req, res) => {
         if (!isMatch) return res.status(400).json({ message: 'Credenciais inválidas' });
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token });
+        res.json({ token,
+          username: user.username
+         });
     } catch (err) {
         console.error(err);
         res.status(400).json({ message: err.message });

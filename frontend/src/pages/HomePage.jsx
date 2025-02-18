@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -44,12 +45,12 @@ const HomePage = () => {
                   {post.title}
                 </h2>
                 <p className="text-gray-400 mb-4">{post.content}</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 mb-5">
                   Publicado em: {new Date(post.date).toLocaleDateString()}
                 </p>
-                <button className="mt-4 px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-500 transition-all duration-300">
-                  Ver mais
-                </button>
+                  <Link to={`/post/${post.id}`}className="mt-4 px-4 py-2 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-500 transition-all duration-300">
+                    Ver mais
+                  </Link>
               </div>
             ))
           ) : (

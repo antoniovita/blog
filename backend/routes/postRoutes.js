@@ -3,7 +3,7 @@ const { createPost, deletePost, getAllPosts, getAllPostsByUser, getPostById, upd
 const authenticateUser = require('../middleware/authenticateUser');
 const router = express.Router();
 
-router.get('/getById', getPostById);
+router.get('/getPostById/:id', getPostById);
 router.get('/getAllPosts', getAllPosts);
 router.get('/getByUser', getAllPostsByUser);
 router.post('/createPost', authenticateUser, createPost);
