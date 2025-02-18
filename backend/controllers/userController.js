@@ -65,4 +65,18 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-module.exports = { createUser, loginUsername, loginEmail, getAllUsers };
+const getUserById = async (req, res) => {
+    try {
+      const user = await User.findByPk(req.user.id, {
+        attributes: ["id", "username", "email"]
+      });
+      if (!user) {
+        return res.status(404).json({ error: "Usuário não encontrado" });
+      }
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: "Erro no servidor" });
+    }
+};
+
+module.exports = { createUser, loginUsername, loginEmail, getAllUsers, getUserById };
