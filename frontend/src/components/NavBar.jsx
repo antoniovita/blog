@@ -7,18 +7,22 @@ const NavBar = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    console.log("Token:", token);
     if (token) {
       axios
         .get("http://localhost:3000/user/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((response) => {
+          console.log("Usuário recebido:", response.data);
           setUser(response.data);
         })
         .catch((error) => {
           console.error("Erro ao buscar o usuário:", error);
           setUser(null);
         });
+    } else {
+      console.log("Token não encontrado");
     }
   }, [token]);
 
@@ -26,7 +30,11 @@ const NavBar = () => {
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
+    console.log("Logout feito, token e usuário removidos");
   };
+
+  console.log("Estado atual do token:", token);
+  console.log("Estado atual do usuário:", user);
 
   return (
     <nav className="bg-black p-5 flex justify-between items-center text-white shadow-xl fixed w-full top-0 left-0 z-20">

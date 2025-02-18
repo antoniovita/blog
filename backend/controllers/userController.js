@@ -79,4 +79,20 @@ const getUserById = async (req, res) => {
     }
 };
 
-module.exports = { createUser, loginUsername, loginEmail, getAllUsers, getUserById };
+const getUserByToken = async (req, res) => {
+  try {
+    const user = req.user;
+
+    if (!user) {
+      return res.status(404).json({ message: 'Usuário não encontrado' });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erro ao buscar o usuário.' });
+  }
+};
+
+
+module.exports = { createUser, loginUsername, loginEmail, getAllUsers, getUserById, getUserByToken };

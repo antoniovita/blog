@@ -46,10 +46,10 @@ const LoginPage = () => {
         <h1 className="text-3xl font-semibold text-indigo-400 mb-6 text-center">
           {activeForm === "register" ? "Registrar" : activeForm === "loginUsername" ? "Login com Username" : "Login com E-mail"}
         </h1>
-        <div className="flex justify-center mb-6 space-x-4">
-          <button className={`text-sm font-medium ${activeForm === "loginEmail" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("loginEmail")}>Login com E-mail</button>
-          <button className={`text-sm font-medium ${activeForm === "loginUsername" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("loginUsername")}>Login com Username</button>
-          <button className={`text-sm font-medium ${activeForm === "register" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("register")}>Registrar</button>
+        <div className="flex justify-center mb-6 space-x-4 gap-2">
+          <button className={`cursor-pointer text-sm font-medium ${activeForm === "loginEmail" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("loginEmail")}>Login com E-mail</button>
+          <button className={`cursor-pointer text-sm font-medium ${activeForm === "loginUsername" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("loginUsername")}>Login com Username</button>
+          <button className={`cursor-pointer text-sm font-medium ${activeForm === "register" ? "text-indigo-400" : "text-gray-400"}`} onClick={() => setActiveForm("register")}>Registrar</button>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -74,7 +74,7 @@ const LoginPage = () => {
 
           {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
 
-          <button type="submit" className="w-full bg-indigo-600 py-2 rounded-lg hover:bg-indigo-500 transition-all">
+          <button type="submit" className="cursor-pointer w-full bg-indigo-600 py-2 rounded-lg hover:bg-indigo-500 transition-all">
             {activeForm === "register" ? "Registrar" : "Entrar"}
           </button>
         </form>
