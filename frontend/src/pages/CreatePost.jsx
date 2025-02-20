@@ -48,7 +48,7 @@ const CreatePostPage = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-transparent p-6">
-      <div className="bg-gray-900 border border-gray-700 p-8 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-black shadow-gray-900 p-8 rounded-lg shadow w-full max-w-md z-10 transition-all duration-300">
         <h2 className="text-2xl font-bold text-white mb-4">Criar Novo Post</h2>
 
         {error && <p className="text-red-500 mb-4">{error}</p>}
@@ -57,8 +57,9 @@ const CreatePostPage = () => {
           <div className="mb-4">
             <label className="block text-gray-300">Título</label>
             <input
+              placeholder="Digite seu título..."
               type="text"
-              className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="mt-2 w-full p-2 rounded bg-black border border-gray-900 shadow shadow-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -68,7 +69,8 @@ const CreatePostPage = () => {
           <div className="mb-4">
             <label className="block text-gray-300">Conteúdo</label>
             <textarea
-              className="w-full p-2 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="Digite sua nota aqui..."
+              className="mt-2 w-full p-2 rounded bg-black border border-gray-900 shadow shadow-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
               rows="5"
               value={content}
               onChange={(e) => setContent(e.target.value)}
@@ -78,7 +80,7 @@ const CreatePostPage = () => {
 
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white p-2 rounded-lg font-semibold hover:bg-indigo-500 transition-all duration-300"
+            className="cursor-pointer w-full hover:shadow-lg shadow-gray-900 shadow bg-gray-960 text-white p-2 rounded-lg font-semibold transition-all duration-300"
             disabled={loading}
           >
             {loading ? "Criando..." : "Criar Post"}
@@ -88,18 +90,61 @@ const CreatePostPage = () => {
 
 
 
-      <video
-        className="absolute top-0 left-0 w-full h-full object-cover -z-10"
-        autoPlay
-        loop
-        muted
-      >
-        <source
-          src="https://videos.pexels.com/video-files/2611250/2611250-uhd_2560_1440_30fps.mp4"
-          type="video/mp4"
-        />
-        Seu navegador não suporta o elemento de vídeo.
-      </video>
+      <div className="absolute top-0 left-0 w-full h-full bg-black overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full">
+          {/* Criando muitas estrelas com a classe 'star' */}
+          {[...Array(200)].map((_, index) => (
+            <div
+              key={index}
+              className="star"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 3 + 2}px`, // Estrelas variando de 2px a 5px
+                height: `${Math.random() * 3 + 2}px`,
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      <style>
+        {`
+          .star {
+            position: absolute;
+            border-radius: 50%;
+            background-color: white;
+            animation: flicker 2s infinite alternate;
+            opacity: 0.8;
+          }
+
+          @keyframes flicker {
+            0% {
+              opacity: 0.4;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
+          .star:nth-child(even) {
+            animation: moveStar 10s infinite linear;
+          }
+
+          .star:nth-child(odd) {
+            animation: moveStar 15s infinite linear;
+          }
+
+          @keyframes moveStar {
+            0% {
+              transform: translateX(0) translateY(0);
+            }
+            100% {
+              transform: translateX(100vw) translateY(100vh);
+            }
+          }
+        `}
+      </style>
 
 
     </div>

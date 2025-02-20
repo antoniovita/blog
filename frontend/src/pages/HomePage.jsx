@@ -39,6 +39,7 @@ const HomePage = () => {
       </div>
 
       <div className="container mx-auto relative z-10">
+        <img src="" alt="" />
         <h1 className="mt-40 mb-10 text-3xl font-bold text-white text-center">
           Últimos Posts
         </h1>
@@ -53,7 +54,7 @@ const HomePage = () => {
                 initial={{ opacity: 0, y: 50 }} // Começando invisível e abaixo
                 animate={{ opacity: 1, y: 0 }} // Animação para aparecer de cima para baixo
                 transition={{ duration: 0.8, delay: index * 0.2 }} // Atraso para cada post
-                className="shadow-sm sm:ml-110 sm:mr-110 flex flex-col cursor-pointer bg-black shadow-gray-900 p-5 rounded-2xl hover:shadow-xl transition-all duration-300"
+                className="border border-gray-900 shadow-sm sm:ml-110 sm:mr-110 flex flex-col cursor-pointer bg-black shadow-gray-900 p-5 rounded-2xl hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex flex-wrap justify-between">
                 <h2 className="text-xl font-semibold text-white mb-2">{post.title}</h2>
