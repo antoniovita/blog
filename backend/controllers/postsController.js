@@ -20,17 +20,22 @@ const createPost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
+        const { userId } = req.body;
         const post = await Posts.findOne({ where: { id } });
-
         if (!post) {
             return res.status(404).json({ error: "Post não encontrado." });
         }
+        console.log(`ID do Post: ${post.user_id}, ID do Usuário enviado: ${userId}`);
+
+        if (post.user_id !== parseInt(userId)) {
+            return res.status(403).json({ error: "Você não tem permissão para deletar este post." });
+        }
 
         await post.destroy();
-        res.json({ message: "Post deletado com sucesso." });
+        return res.status(204).send();
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Erro ao deletar post" });
+        return res.status(500).json({ error: "Erro ao deletar post." });
     }
 };
 

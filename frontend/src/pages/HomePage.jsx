@@ -50,14 +50,13 @@ const HomePage = () => {
             posts.map((post, index) => (
               <motion.div
                 key={post.id}
-                onClick={() => navigate(`/post/${post.id}`)}
                 initial={{ opacity: 0, y: 50 }} // Começando invisível e abaixo
                 animate={{ opacity: 1, y: 0 }} // Animação para aparecer de cima para baixo
                 transition={{ duration: 0.8, delay: index * 0.2 }} // Atraso para cada post
-                className="border border-gray-900 shadow-sm sm:ml-110 sm:mr-110 flex flex-col cursor-pointer bg-black shadow-gray-900 p-5 rounded-2xl hover:shadow-xl transition-all duration-300"
+                className="border border-gray-900 shadow-sm sm:ml-110 sm:mr-110 flex flex-col  bg-black shadow-gray-900 p-5 rounded-2xl hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex flex-wrap justify-between">
-                <h2 className="text-xl font-semibold text-white mb-2">{post.title}</h2>
+                <h2 onClick={() => navigate(`/post/${post.id}`)} className="cursor-pointer text-xl font-semibold text-white mb-2">{post.title}</h2>
                 <Link to={`/user/${post.user_id}`} className="w-18 text-sm text-gray-400 flex flex-wrap gap-2 hover:text-gray-200 transform transition-all duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
                   <p className="">

@@ -6,6 +6,7 @@ const NavBar = () => {
   const username = localStorage.getItem('username');
   const handleLogout = () => {
     localStorage.removeItem('username');
+    localStorage.removeItem('token');
     window.location.reload();
   };
 
