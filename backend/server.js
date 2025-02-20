@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const {sequelize} = require('./models');
-const postReplyRoutes = require('./routes/postReplyRoutes');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
 
@@ -11,7 +10,6 @@ app.use(express.json());
 
 app.use('/posts' , postRoutes);
 app.use('/user' , userRoutes);
-app.use('/postReply' , postReplyRoutes);
 
 const PORT = process.env.PORT;
 

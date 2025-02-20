@@ -35,6 +35,7 @@ const LoginPage = () => {
       console.log(response.data);
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("username", response.data.username);
+      localStorage.setItem("id", response.data.id);
       navigate("/");
       window.location.reload();
     } catch (error) {

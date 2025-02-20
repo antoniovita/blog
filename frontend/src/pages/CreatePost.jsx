@@ -15,6 +15,7 @@ const CreatePostPage = () => {
     setError(null);
 
     const token = localStorage.getItem("token");
+    const user_id = localStorage.getItem("id");
 
     if (!token) {
       setError("Usuário não autenticado. Faça login.");
@@ -25,7 +26,7 @@ const CreatePostPage = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/posts/createPost",
-        { title, content },
+        { title, content, user_id },
         {
           headers: {
             Authorization: `Bearer ${token}`,

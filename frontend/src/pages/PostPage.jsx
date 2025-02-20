@@ -33,16 +33,16 @@ const PostPage = () => {
       </video>
 
       <div className="container mx-auto px-6 py-20 z-10">
-        <div className="bg-gray-900 bg-opacity-100 border-gray-700 border p-6 rounded-2xl shadow-lg mt-10">
-            <div className="flex flex-wrap gap-3">
-                <Link to={'/'} className="flex justify-center items-center p-3 bg-indigo-600 text-white rounded-lg h-[40px] w-[45px] text-[18px] transform transition-all duration-300 hover:bg-indigo-500 shadow-lg hover:shadow-xl"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg> </Link>
+        <div className="bg-black shadow-lg shadow-gray-900 p-5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 mt-10">
+            <div className="flex flex-wrap gap-3 justify-between">
                 <h1 className="text-3xl font-bold text-white mb-4 mt-0.75">{post.title}</h1>
+                <Link to={'/'} className="text-white"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg> </Link>
             </div>
           <p className="text-gray-300 mb-4">{post.content}</p>
           <p className="text-sm text-gray-500 mb-6">
             Publicado em: {new Date(post.date).toLocaleDateString()}
           </p>
-        <Link to={`/post/${post.user_id}`} className="w-30 text-sm text-gray-500 flex flex-wrap gap-2 hover:text-gray-200 transform transition-all duration-300">
+        <Link to={`/user/${post.user_id}`} className="w-30 text-sm text-gray-500 flex flex-wrap gap-2 hover:text-gray-200 transform transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-user-round"><path d="M18 20a6 6 0 0 0-12 0"/><circle cx="12" cy="10" r="4"/><circle cx="12" cy="12" r="10"/></svg>
             <p className="mt-0.75">
              {post.user.username}

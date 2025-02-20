@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import PostPage from "./pages/PostPage";
 import CreatePostButton from "./components/CreatePostButton";
 import CreatePostPage from "./pages/CreatePost";
+import UserPage from "./pages/UserPage"
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/post/:id" element={<PostPage />} />
         <Route path="/create-post" element={<CreatePostPage />} />
+        <Route path="/user/:id" element={<UserPage />} />
       </Routes>
       <CreatePostButton/>
     </Router>

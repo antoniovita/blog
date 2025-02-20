@@ -9,18 +9,19 @@ const NavBar = () => {
     window.location.reload();
   };
 
+  const id = localStorage.getItem('id');
+
   return (
-    <nav className="bg-black p-5 flex justify-between items-center text-white shadow-xl fixed w-full top-0 left-0 z-20">
-      <Link to={'/'}><h1 className="ml-5 text-3xl font-semibold tracking-wide text-indigo-500 hover:text-indigo-400 transition-all duration-300">
-        S'up
-      </h1> </Link>
+    <nav className="bg-transparent p-5 flex justify-between items-center text-white shadow-xl fixed w-full top-0 left-0 z-20">
+      <Link className="ml-10" to={'/'}> 
+      </Link>
 
 
       <div className="flex items-center space-x-4 mr-5">
         {username ? (
-          <div className="flex items-center space-x-3 gap-10">
+          <div className="flex items-center space-x-3 gap-5">
             <div className="flex flex-wrap gap-2">
-              <Link className="flex flex-wrap gap-2" to={'/account'}>
+              <Link className="flex flex-wrap gap-2" to={`/user/${id}`}>
                   <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -50,7 +51,7 @@ const NavBar = () => {
         ) : (
           <Link
             to="/login"
-            className="text-lg font-medium bg-indigo-600 px-4 py-2 rounded-full hover:bg-indigo-500 transition-all duration-300"
+            className="shadow-sm shadow-gray-900 text-lg font-medium bg-black px-4 py-2 rounded-full hover:shadow-lg transition-all duration-300"
           >
             Login
           </Link>
