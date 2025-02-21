@@ -7,7 +7,7 @@ router.get('/getPostById/:id', getPostById);
 router.get('/getAllPosts', getAllPosts);
 router.get('/getByUser/:user_id', getAllPostsByUser);
 router.post('/createPost', authenticateUser, createPost);
-router.put('/update', authenticateUser, updatePost);
+router.put('/update/:id', authenticateUser, updatePost);
 router.delete('/delete/:id' , authenticateUser, deletePost);
 
 module.exports = router;

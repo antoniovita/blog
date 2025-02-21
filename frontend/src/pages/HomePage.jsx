@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-import { motion } from "framer-motion"; // Para animações suaves
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -19,10 +19,8 @@ const HomePage = () => {
 
   return (
     <div className="relative min-h-screen flex justify-center p-6">
-      {/* Fundo estrelado animado */}
       <div className="absolute top-0 left-0 w-full h-full bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
-          {/* Criando muitas estrelas com a classe 'star' */}
           {[...Array(200)].map((_, index) => (
             <div
               key={index}
@@ -50,9 +48,9 @@ const HomePage = () => {
             posts.map((post, index) => (
               <motion.div
                 key={post.id}
-                initial={{ opacity: 0, y: 50 }} // Começando invisível e abaixo
-                animate={{ opacity: 1, y: 0 }} // Animação para aparecer de cima para baixo
-                transition={{ duration: 0.8, delay: index * 0.2 }} // Atraso para cada post
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }} 
+                transition={{ duration: 0.8, delay: index * 0.2 }} 
                 className="border border-gray-900 shadow-sm sm:ml-110 sm:mr-110 flex flex-col  bg-black shadow-gray-900 p-5 rounded-2xl hover:shadow-xl transition-all duration-300"
               >
                 <div className="flex flex-wrap justify-between">
@@ -86,7 +84,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Estilos adicionais para animação das estrelas */}
+
       <style>
         {`
           .star {

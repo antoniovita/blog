@@ -50,7 +50,7 @@ const PostPage = () => {
 
       <div className="absolute top-0 left-0 w-full h-full bg-black overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full">
-          {/* Criando muitas estrelas com a classe 'star' */}
+
           {[...Array(200)].map((_, index) => (
             <div
               key={index}

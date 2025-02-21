@@ -3,10 +3,10 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 const UserPage = () => {
-  const [posts, setPosts] = useState([]); // Alterei para 'posts' (plural)
+  const [posts, setPosts] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const userId = localStorage.getItem('id'); // Obtém o user.id do localStorage
+  const userId = localStorage.getItem('id'); 
 
   useEffect(() => {
     axios
@@ -64,7 +64,7 @@ const UserPage = () => {
                             <line x1="14" x2="14" y1="11" y2="17"/>
                           </svg>
                         </button>
-                        <button className="text-gray-400 mb-4 cursor-pointer hover:text-white transition-all duration-300">
+                        <button onClick={() => navigate(`/edit/${post.id}`)} className="text-gray-400 mb-4 cursor-pointer hover:text-white transition-all duration-300">
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-square-pen">
                             <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
                             <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/>
@@ -76,7 +76,13 @@ const UserPage = () => {
                 </div>
                 <p className="text-gray-400 mb-4 line-clamp-3">{post.content}</p>
                 <p className="text-sm text-gray-500 mb-2">
-                  Publicado em: {new Date(post.date).toLocaleDateString()}
+                {new Date(post.date).toLocaleString("pt-BR", {
+                      year: "numeric", 
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "2-digit", 
+                      minute: "2-digit",
+                    })}
                 </p>
               </div>
             ))
