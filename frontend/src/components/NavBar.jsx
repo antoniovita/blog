@@ -20,7 +20,7 @@ const NavBar = () => {
       </Link>
 
 
-      <div className="flex items-center space-x-4 mr-5">
+      <div className="flex items-center space-x-4">
         {username ? (
           <div className="flex items-center space-x-3 gap-5">
             <div className="flex flex-wrap gap-2">

@@ -45,7 +45,7 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen relative flex items-start justify-center">
-      <div className="border border-gray-900 bg-black bg-opacity-60 p-6 rounded-xl max-w-md w-full z-10 mt-60">
+      <div className="border border-gray-900 bg-black bg-opacity-60 p-6 rounded-xl max-w-md w-full z-10 flex flex-col xl:mt-60 lg:mt-48 md:mt-36 sm:mt-40 mt-20">
         <h1 className="text-3xl font-semibold text-white mb-6 text-center">
           {activeForm === "register" ? "Registrar" : activeForm === "loginUsername" ? "Login com Username" : "Login com E-mail"}
         </h1>
